@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sit and Spin Record Player</title>
+  <style>
+    body {
+      margin: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1> PRAISE CAGE </h1>
+  <p> WebSocket says: </span> {} </span> </p>
+</body>
+
+<script>
+  console.log('praise cage!')
+  const socket = new WebSocket(`ws://localhost:3000/ws`)
+
+  socket.addEventListener('open', event => {
+    socket.send('praise cage! from client')
+  })
+
+  socket.addEventListener('message', event => {
+    console.log('message from server :', event.data)
+  })
+</script>
+
+</html>
