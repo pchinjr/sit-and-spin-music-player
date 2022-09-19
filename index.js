@@ -1,3 +1,4 @@
+// this is the main logic for the sensor
 const { Board, Sensor, Led } = require('johnny-five')
 
 const board = new Board()

@@ -1,3 +1,4 @@
+// this is a test script to see if your arduino is working
 const { Board, Led } = require("johnny-five");
 const board = new Board();
 

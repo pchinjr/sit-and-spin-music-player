@@ -1,3 +1,4 @@
+// all server side logic will go here until I decide to break it up
 const fastify = require('fastify')({ logger: true })
 const path = require('path')
 
