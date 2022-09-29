@@ -15,20 +15,46 @@
 
 <body>
   <h1> PRAISE CAGE </h1>
-  <p> WebSocket says: </span> {} </span> </p>
+  <p> WebSocket says: <span id="data"> {} </span>x Playback Rate </p>
+  <audio id="audioPlayer" controls src="/public/Betty-Get-Money.mp3">
+    <a href="/public/Betty-Get-Money.mp3">
+      Download audio
+    </a>
+  </audio>
+  <div>
+    <input id="playbackRate" type="range" name="playbackRate" min="25" max="200" value="100">
+    <label for="playbackRate">Manual Playback Rate</label>
+  </div>
+
+  <script>
+    console.log('praise cage!')
+
+    const socket = new WebSocket(`ws://localhost:3000/ws`)
+    const audioPlayer = document.getElementById('audioPlayer')
+    const inputSlider = document.getElementById('playbackRate')
+
+    inputSlider.addEventListener('input', function () {
+      audioPlayer.playbackRate = inputSlider.value / 100
+    })
+
+    socket.addEventListener('open', event => {
+      socket.send('praise cage! from client')
+    })
+
+    socket.addEventListener('message', event => {
+      updateDOM(event.data)
+      updatePlaybackRate(event.data)
+    })
+
+    function updateDOM(data) {
+      document.getElementById('data').innerText = data
+    }
+
+    function updatePlaybackRate(data) {
+      audioPlayer.playbackRate = parseFloat(data)
+    }
+  </script>
 </body>
 
-<script>
-  console.log('praise cage!')
-  const socket = new WebSocket(`ws://localhost:3000/ws`)
-
-  socket.addEventListener('open', event => {
-    socket.send('praise cage! from client')
-  })
-
-  socket.addEventListener('message', event => {
-    console.log('message from server :', event.data)
-  })
-</script>
 
 </html>
