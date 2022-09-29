@@ -15,7 +15,7 @@
 
 <body>
   <h1> PRAISE CAGE </h1>
-  <p> WebSocket says: <span id="data"> {} </span>x Playback Rate </p>
+  <p> WebSocket says: <span id="data"> {} </span> rpm</p>
   <audio id="audioPlayer" controls src="/public/Betty-Get-Money.mp3">
     <a href="/public/Betty-Get-Money.mp3">
       Download audio
@@ -51,7 +51,25 @@
     }
 
     function updatePlaybackRate(data) {
-      audioPlayer.playbackRate = parseFloat(data)
+      if (data > 0) {
+        // 0, 120:0.25, 240:0.50, 300:1.0, 360:2.0
+        const rpmToPlaybackRateMap = {
+          "0": 0.1,
+          "60": 0.2,
+          "120": 0.25,
+          "240": 1.0,
+          "300": 1.0,
+          "360": 1.5,
+          "420": 2.0
+        }
+        console.log(data)
+        audioPlayer.playbackRate = rpmToPlaybackRateMap[data]
+        audioPlayer.play()
+      } else {
+        audioPlayer.pause()
+      }
+
+      // audioPlayer.playbackRate = parseFloat(data)
     }
   </script>
 </body>

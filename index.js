@@ -14,11 +14,11 @@ board.on('ready', () => {
   let revolutions = 0
 
   digitalSensor.on('change', value => {
+    console.log("Digital Sensor: ")
+    console.log("value  : ", value)
+    console.log("revolutions: ", revolutions)
+    console.log("-----------------")
     if (value === 0) {
-      // console.log("Digital Sensor: ")
-      // console.log("value  : ", value)
-      // console.log("revolutions: ", revolutions)
-      // console.log("-----------------")
       led.on()
       revolutions += 1
     } else {
